@@ -12,11 +12,7 @@ public class BinaryTree {
             current.left = addRecursive(current.left, value);
         } else if (value > current.value) {
             current.right = addRecursive(current.right, value);
-        } else {
-            // value already exists
-            return current;
         }
-
         return current;
     }
 
