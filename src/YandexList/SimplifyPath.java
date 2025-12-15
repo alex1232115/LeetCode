@@ -1,12 +1,11 @@
 package YandexList;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Stack;
 
 public class SimplifyPath {
     public String simplifyPath(String path) {
-        String[] split = path.replaceAll("/+", "/").replaceFirst("/", "").split("/");
-        Deque<String> stack = new ArrayDeque<>();
+        String[] split = path.split("/");
+        Stack<String> stack = new Stack<>();
         for (String i: split) {
             switch (i) {
                 case ".." -> {
@@ -14,13 +13,13 @@ public class SimplifyPath {
                         stack.pop();
                     }
                 }
-                case "." -> {}
+                case ".", "" -> {}
                 default -> stack.push(i);
             }
         }
         StringBuilder result = new StringBuilder();
-        while (!stack.isEmpty()) {
-            result.append("/").append(stack.removeLast());
+        for (String str: stack) {
+            result.append("/").append(str);
         }
         return result.isEmpty() ? "/" : result.toString();
     }
